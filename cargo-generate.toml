@@ -8,5 +8,5 @@ pre = ["cargo-generate/prehook.rhai"]
 [placeholders.hal]
 type = "string"
 prompt = "Which HAL?"
-choices = ["rp-hal", "embassy"]
-default = "rp-hal"
+choices = ["embassy", "rp-hal"]
+default = "embassy"
