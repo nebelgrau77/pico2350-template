@@ -1,0 +1,42 @@
+[package]
+name = "{{project-name}}"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cortex-m = "0.7.6"
+cortex-m-rt = "0.7.3"
+
+{% if hal == "embassy" -%}
+embassy-executor = { version = "0.7.0", features = [
+  "arch-cortex-m",
+  "executor-thread",
+  "defmt",
+  "executor-interrupt",
+  "task-arena-size-20480"
+] }
+defmt-rtt = "1.1.0"
+panic-probe = { version = "1.0.0" }
+embassy-time = { version = "0.5.0", features = [
+    "defmt",
+    "defmt-timestamp-uptime",
+] }
+embassy-rp = { version = "0.8.0", features = [
+  "defmt",
+  "time-driver",
+  "critical-section-impl",
+  "rp235xa",
+  "binary-info",
+  "unstable-pac"
+] }
+{% else -%}
+embedded-hal = "1.0.0"
+rp235x-hal = { git = "https://github.com/rp-rs/rp-hal", version = "0.2.0", features = [
+  "binary-info",
+  "critical-section-impl",
+  "rt",
+  "defmt",
+] }
+panic-halt = "0.2.0"
+rp-binary-info = "0.1.0"
+{% endif %}
